@@ -1,9 +1,10 @@
 var utils = require('utils');
+var creeps = require('creeps');
 
 module.exports.loop = function() {
 
     utils.clearMemory();
 
-    utils.spawnCreeps();
-    utils.runCreeps();
+    creeps.spawn();
+    creeps.run();
 }
