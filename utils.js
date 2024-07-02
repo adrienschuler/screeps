@@ -4,7 +4,7 @@ var utils = {
     },
     spawnCreep: function(game, role) {
         var name = role + game.time;
-        if (game.spawns[SPAWN].spawnCreep([WORK, CARRY, MOVE], name, {memory: {role: role}}) == 0) {
+        if (game.spawnCreep([WORK, CARRY, MOVE], name, {memory: {role: role}}) == 0) {
             console.log('Spawning new ' + role + ': ' + name);
         }
     }
