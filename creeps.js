@@ -37,6 +37,15 @@ var creeps = {
             roles[creep.memory.role].run(creep, _sources);
         }
     },
+
+    recycle: function(creep) {
+        for (var creep in Game.creeps) {
+            if (creep.ticksToLive < 60) {
+                console.log("Recycling " + creep.name);
+                Memory.sources[creep.memory.sourceId] -= 1;
+                creep.suicide();
+            }
+    }
 }
 
 module.exports = creeps;

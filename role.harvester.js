@@ -7,7 +7,7 @@ var roleHarvester = {
             if (creep.memory.sourceId == undefined) {
                 var sources = creep.room.find(FIND_SOURCES);
                 for (const source of sources) {
-                    if (Memory.sources == undefined || Memory.sources[source.id] == undefined) {
+                    if (Memory.sources == undefined || Memory.sources[source.id] == undefined || Memory.sources[source.id] <= 0) {
                         Memory.sources[source.id] = 1;
                         creep.memory.sourceId = source.id;
                         break;

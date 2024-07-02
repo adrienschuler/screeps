@@ -7,6 +7,13 @@ var utils = {
                 console.log('Clearing non-existing creep memory:', name);
             }
         }
+        for (const id in Memory.sources) {
+            console.log(id);
+            if (!Game.getObjectById(id)) {
+                console.log("Deleting objectID " + id);
+                delete Memory.sources[id];
+            }
+        }
     },
 }
 
