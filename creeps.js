@@ -45,6 +45,7 @@ var creeps = {
                 Memory.sources[creep.memory.sourceId] -= 1;
                 creep.suicide();
             }
+        }
     }
 }
 
