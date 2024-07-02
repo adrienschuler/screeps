@@ -1,7 +1,7 @@
 var roleBuilder = {
 
     /** @param {Creep} creep **/
-    run: function(creep, _sources) {
+    run: function(creep) {
 
 	    if(creep.memory.building && creep.store[RESOURCE_ENERGY] == 0) {
             creep.memory.building = false;

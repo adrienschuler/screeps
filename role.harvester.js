@@ -11,7 +11,7 @@ var roleHarvester = {
                         Memory.sources[source.id] = 1;
                         creep.memory.sourceId = source.id;
                         break;
-                    } else if (Memory.sources[source.id] < 2) {
+                    } else if (Memory.sources[source.id] < 3) {
                         Memory.sources[source.id] += 1;
                         creep.memory.sourceId = source.id;
                         break;
