@@ -20,15 +20,15 @@ var creeps = {
     },
 
     spawn: function() {
-        if (creeps.findByRole('harvester').length < 2) {
+        if (creeps.findByRole('harvester').length < 6) {
             return creeps._spawn('harvester');
         }
-        if (creeps.findByRole('upgrader').length < 1) {
-            return creeps._spawn('upgrader');
-        }
-        if (creeps.findByRole('builder').length < 1) {
-            return creeps._spawn('builder');
-        }
+        // if (creeps.findByRole('upgrader').length < 1) {
+        //     return creeps._spawn('upgrader');
+        // }
+        // if (creeps.findByRole('builder').length < 1) {
+        //     return creeps._spawn('builder');
+        // }
     },
 
     run: function(_sources) {

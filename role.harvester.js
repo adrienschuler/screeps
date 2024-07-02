@@ -1,26 +1,28 @@
 var roleHarvester = {
 
     /** @param {Creep} creep **/
-    run: function(creep, _sources) {
+    run: function(creep) {
 	    if (creep.store.getFreeCapacity() > 0) {
-            var sources = creep.room.find(FIND_SOURCES);
 
-            for (source in sources) {
-                if (_sources.state[sources[source].id] == undefined) {
-                    _sources.state[sources[source].id] = 1;
-                    if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
-                        creep.memory.source = source.id;
-                        return;
-                    }
-                } else if (_sources.state[sources[source].id] < 2) {
-                    _sources.state[sources[source].id] = _sources.state[sources[source].id] + 1;
-                    if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
-                        creep.memory.source = source.id;
-                        return;
+            if (creep.memory.sourceId == undefined) {
+                var sources = creep.room.find(FIND_SOURCES);
+                for (const source of sources) {
+                    if (Memory.sources == undefined || Memory.sources[source.id] == undefined) {
+                        Memory.sources[source.id] = 1;
+                        creep.memory.sourceId = source.id;
+                        break;
+                    } else if (Memory.sources[source.id] < 2) {
+                        Memory.sources[source.id] += 1;
+                        creep.memory.sourceId = source.id;
+                        break;
                     }
                 }
+            }
+
+            var source = Game.getObjectById(creep.memory.sourceId);
+
+            if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
             }
         }
         else {
