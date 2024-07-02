@@ -7,6 +7,7 @@ var roles = {
 var SPAWN = "Spawn1";
 
 var creeps = {
+
     findByRole: function(role) {
         return _.filter(Game.creeps, (creep) => creep.memory.role == role);
     },
@@ -30,10 +31,10 @@ var creeps = {
         }
     },
 
-    run: function() {
+    run: function(_sources) {
         for (var name in Game.creeps) {
             var creep = Game.creeps[name];
-            roles[creep.memory.role].run(creep);
+            roles[creep.memory.role].run(creep, _sources);
         }
     },
 }
