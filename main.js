@@ -5,8 +5,6 @@ var roleUpgrader = require('role.upgrader');
 
 module.exports.loop = function() {
 
-    var SPAWN = "Spawn1";
-
     for (var name in Memory.creeps) {
         if (!Game.creeps[name]) {
             delete Memory.creeps[name];
@@ -15,15 +13,15 @@ module.exports.loop = function() {
     }
 
     if (utils.getCreepsByRole('harvester').length < 2) {
-        utils.spawnCreep(Game.spawns[SPAWN], 'harvester');
+        utils.spawnCreep('harvester');
     }
 
     if (utils.getCreepsByRole('builders').length < 1) {
-        utils.spawnCreep(Game.spawns[SPAWN], 'builder');
+        utils.spawnCreep('builder');
     }
 
     if (utils.getCreepsByRole('upgraders').length < 1) {
-        utils.spawnCreep(Game.spawns[SPAWN], 'upgrader');
+        utils.spawnCreep('upgrader');
     }
 
     for (var name in Game.creeps) {
