@@ -18,10 +18,9 @@ var utils = {
         if (Math.random() < 0.9) {
             creepSources = creeps.getSources();
             for (let creepSource in creepSources) {
-                if (creepSource == undefined) {
-                    continue;
+                if (creepSource != undefined) {
+                    Memory.sources[creepSource] = creepSources[creepSource];
                 }
-                Memory.sources[creepSource] = creepSources[creepSource];
             }
         }
     }

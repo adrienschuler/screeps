@@ -21,11 +21,11 @@ var creeps = {
         if (creeps.findByRole('harvester').length < 4) {
             return creeps._spawn('harvester', spawn);
         }
-        if (creeps.findByRole('builder').length < 9) {
-            return creeps._spawn('builder', spawn);
-        }
         if (creeps.findByRole('upgrader').length < 1) {
             return creeps._spawn('upgrader', spawn);
+        }
+        if (creeps.findByRole('builder').length < 9) {
+            return creeps._spawn('builder', spawn);
         }
     },
 
@@ -37,7 +37,9 @@ var creeps = {
     },
 
     recycle: function() {
+        // BUG: ticksToLive is undefined
         for (let creep in Game.creeps) {
+            console.log(creep.ticksToLive);
             if (creep.ticksToLive < 10) {
                 console.log("Recycling " + creep.name);
                 Memory.sources[creep.memory.sourceId] -= 1;
@@ -50,13 +52,11 @@ var creeps = {
         sources = {};
         for (let name in Game.creeps) {
             creep = Game.creeps[name];
-            if (creep.memory.sourceId == undefined) {
-                continue;
-            }
-            if (sources[creep.memory.sourceId] == undefined) {
-                sources[creep.memory.sourceId] = 0;
-            }
-            sources[creep.memory.sourceId] += 1;
+            if (creep.memory.sourceId != undefined) {
+                if (sources[creep.memory.sourceId] == undefined) {
+                    sources[creep.memory.sourceId] = 0;
+                }
+                sources[creep.memory.sourceId] += 1;
         }
         return sources;
     },
