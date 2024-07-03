@@ -23,7 +23,7 @@ var sources = {
     },
 
     harvest: function(creep) {
-        if (creep.memory.sourceId == undefined) {
+        if (creep.memory.sourceId == undefined || creep.memory.sourceId == "undefined" ) {
             creep.memory.sourceId = sources.getAvailableSource();
         }
         var source = Game.getObjectById(creep.memory.sourceId);
