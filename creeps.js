@@ -1,7 +1,8 @@
 var roles = {
     harvester: require('role.harvester'),
     builder: require('role.builder'),
-    upgrader: require('role.upgrader')
+    upgrader: require('role.upgrader'),
+    hauler: require('role.hauler'),
 };
 
 var creeps = {
@@ -21,10 +22,13 @@ var creeps = {
         if (creeps.findByRole('harvester').length < 4) {
             return creeps._spawn('harvester', spawn);
         }
-        if (creeps.findByRole('upgrader').length < 1) {
+        if (creeps.findByRole('hauler').length < 2) {
+            return creeps._spawn('hauler', spawn);
+        }
+        if (creeps.findByRole('upgrader').length < 2) {
             return creeps._spawn('upgrader', spawn);
         }
-        if (creeps.findByRole('builder').length < 9) {
+        if (creeps.findByRole('builder').length < 8) {
             return creeps._spawn('builder', spawn);
         }
     },

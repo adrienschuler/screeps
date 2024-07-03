@@ -1,6 +1,5 @@
 var roleHarvester = {
 
-    /** @param {Creep} creep **/
     run: function(creep, sources) {
 	    if (creep.store.getFreeCapacity() > 0) {
             sources.harvest(creep);

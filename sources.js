@@ -23,10 +23,28 @@ var sources = {
     },
 
     harvest: function(creep) {
+        // if (creep.memory.role == "builder" || creep.memory.role == "upgrader") {
+        //     const containersWithEnergy = creep.room.find(FIND_STRUCTURES, {
+        //         filter: (i) => i.structureType == STRUCTURE_CONTAINER &&
+        //                        i.store[RESOURCE_ENERGY] > 0
+        //     });
+        //     container = containersWithEnergy[0].id;
+        //     creep.memory.sourceId = container;
+
+        //     if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+        //         creep.moveTo(container, {visualizePathStyle: {stroke: '#ffaa00'}});
+        //     }
+
+        // } else if (creep.memory.sourceId == undefined || creep.memory.sourceId == "undefined" ) {
+        //     creep.memory.sourceId = sources.getAvailableSource();
+        // }
+
         if (creep.memory.sourceId == undefined || creep.memory.sourceId == "undefined" ) {
             creep.memory.sourceId = sources.getAvailableSource();
         }
+
         var source = Game.getObjectById(creep.memory.sourceId);
+
         if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
             creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
         }
