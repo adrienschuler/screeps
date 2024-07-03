@@ -10,7 +10,7 @@ module.exports.loop = function() {
 
     creeps.spawn(SPAWN);
     creeps.run(sources);
-    // creeps.recycle();
+    creeps.recycle();
 
     utils.clear(creeps);
 }
