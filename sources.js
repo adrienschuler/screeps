@@ -9,11 +9,12 @@ var sources = {
     },
 
     getAvailableSource: function() {
-        let threshold = 3;
+        let threshold = 7;
         for (let sourceId in Memory.sources) {
             capacity = Memory.sources[sourceId];
             if (capacity < threshold) {
                 console.log("sources.getAvailableSource: " + sourceId + " = " + capacity);
+                Memory.sources[sourceId] += 1;
                 return sourceId;
             }
         }

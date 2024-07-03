@@ -1,5 +1,10 @@
 
 var utils = {
+    clear: function(creeps) {
+        utils.clearMemory();
+        utils.clearSources(creeps);
+    },
+
     clearMemory: function() {
         for (let name in Memory.creeps) {
             if (!Game.creeps[name]) {
@@ -7,13 +12,19 @@ var utils = {
                 console.log('Clearing non-existing creep memory:', name);
             }
         }
-        for (let id in Memory.sources) {
-            if (!Game.getObjectById(id)) {
-                console.log("Deleting objectID " + id);
-                delete Memory.sources[id];
+    },
+
+    clearSources: function(creeps) {
+        if (Math.random() < 0.9) {
+            creepSources = creeps.getSources();
+            for (let creepSource in creepSources) {
+                if (creepSource == undefined) {
+                    continue;
+                }
+                Memory.sources[creepSource] = creepSources[creepSource];
             }
         }
-    },
+    }
 }
 
 module.exports = utils;

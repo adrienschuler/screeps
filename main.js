@@ -12,5 +12,5 @@ module.exports.loop = function() {
     creeps.run(sources);
     creeps.recycle();
 
-    utils.clearMemory();
+    utils.clear(creeps);
 }
