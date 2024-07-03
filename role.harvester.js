@@ -3,27 +3,7 @@ var roleHarvester = {
     /** @param {Creep} creep **/
     run: function(creep) {
 	    if (creep.store.getFreeCapacity() > 0) {
-
-            if (creep.memory.sourceId == undefined) {
-                var sources = creep.room.find(FIND_SOURCES);
-                for (const source of sources) {
-                    if (Memory.sources == undefined || Memory.sources[source.id] == undefined || Memory.sources[source.id] <= 0) {
-                        Memory.sources[source.id] = 1;
-                        creep.memory.sourceId = source.id;
-                        break;
-                    } else if (Memory.sources[source.id] < 3) {
-                        Memory.sources[source.id] += 1;
-                        creep.memory.sourceId = source.id;
-                        break;
-                    }
-                }
-            }
-
-            var source = Game.getObjectById(creep.memory.sourceId);
-
-            if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
-            }
+            roleHarvester.harvest(creep);
         }
         else {
             var targets = creep.room.find(FIND_STRUCTURES, {
@@ -38,7 +18,30 @@ var roleHarvester = {
                 }
             }
         }
-	}
+	},
+
+    harvest: function(creep) {
+        if (creep.memory.sourceId == undefined) {
+            var sources = creep.room.find(FIND_SOURCES);
+            for (let source of sources) {
+                if (Memory.sources == undefined || Memory.sources[source.id] == undefined || Memory.sources[source.id] <= 0) {
+                    Memory.sources[source.id] = 1;
+                    creep.memory.sourceId = source.id;
+                    break;
+                } else if (Memory.sources[source.id] < 2) {
+                    Memory.sources[source.id] += 1;
+                    creep.memory.sourceId = source.id;
+                    break;
+                }
+            }
+        }
+
+        var source = Game.getObjectById(creep.memory.sourceId);
+
+        if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
+            creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
+        }
+    }
 };
 
 module.exports = roleHarvester;

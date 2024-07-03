@@ -32,21 +32,31 @@ var creeps = {
     },
 
     run: function() {
-        for (var name in Game.creeps) {
+        for (let name in Game.creeps) {
             var creep = Game.creeps[name];
             roles[creep.memory.role].run(creep);
         }
     },
 
-    recycle: function(creep) {
-        for (var creep in Game.creeps) {
-            if (creep.ticksToLive < 60) {
+    recycle: function() {
+        for (let creep in Game.creeps) {
+            if (creep.ticksToLive < 10) {
                 console.log("Recycling " + creep.name);
                 Memory.sources[creep.memory.sourceId] -= 1;
                 creep.suicide();
             }
         }
-    }
+    },
+
+    getSources: function() {
+        sources = {};
+        for (let name in Game.creeps) {
+            creep = Game.creeps[name];
+            console.log(creep.memory.sourceId);
+            sources[creep.memory.sourceId] += 1;
+        }
+        return sources;
+    },
 }
 
 module.exports = creeps;

@@ -1,11 +1,16 @@
 var utils = require('utils');
 var creeps = require('creeps');
+var sources = require('sources');
 
 module.exports.loop = function() {
-    Memory.sources = Memory.sources || {};
+    var ROOM = "E45S2";
+    var SPAWN = "Spawn1";
 
-    utils.clearMemory();
-    creeps.spawn();
+    sources.init(ROOM);
+
+    creeps.spawn(SPAWN);
     creeps.run();
     creeps.recycle();
+
+    utils.clearMemory();
 }
