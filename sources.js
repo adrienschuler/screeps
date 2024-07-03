@@ -7,6 +7,7 @@ var sources = {
             }
         }
     },
+
     getAvailableSource: function() {
         let threshold = 3;
         for (let sourceId in Memory.sources) {
@@ -15,6 +16,16 @@ var sources = {
                 console.log("sources.getAvailableSource: " + sourceId + " = " + capacity);
                 return sourceId;
             }
+        }
+    },
+
+    harvest: function(creep) {
+        if (creep.memory.sourceId == undefined) {
+            creep.memory.sourceId = sources.getAvailableSource();
+        }
+        var source = Game.getObjectById(creep.memory.sourceId);
+        if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
+            creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
         }
     }
 }

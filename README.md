@@ -1,5 +1,5 @@
 ```javascript
-Game.spawns["Spawn1"].spawnCreep([WORK, CARRY, MOVE], "harvester1", {memory: {role: "harvester"}});
+Game.spawns["Spawn1"].spawnCreep([WORK, CARRY, MOVE], "harvesterTEST", {memory: {role: "harvester"}});
 ```
 
 ```javascript

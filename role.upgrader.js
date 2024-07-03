@@ -18,11 +18,7 @@ var roleUpgrader = {
             }
         }
         else {
-            var availableSource = sources.getAvailableSource();
-            var source = Game.getObjectById(availableSource);
-            if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
-            }
+			sources.harvest(creep);
         }
 	}
 };
