@@ -31,10 +31,10 @@ var creeps = {
         }
     },
 
-    run: function() {
+    run: function(sources) {
         for (let name in Game.creeps) {
             var creep = Game.creeps[name];
-            roles[creep.memory.role].run(creep);
+            roles[creep.memory.role].run(creep, sources);
         }
     },
 

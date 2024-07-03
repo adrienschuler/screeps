@@ -9,7 +9,7 @@ module.exports.loop = function() {
     sources.init(ROOM);
 
     creeps.spawn(SPAWN);
-    creeps.run();
+    creeps.run(sources);
     creeps.recycle();
 
     utils.clearMemory();

@@ -1,9 +1,9 @@
 var roleHarvester = {
 
     /** @param {Creep} creep **/
-    run: function(creep) {
+    run: function(creep, sources) {
 	    if (creep.store.getFreeCapacity() > 0) {
-            roleHarvester.harvest(creep);
+            roleHarvester.harvest(creep, sources);
         }
         else {
             var targets = creep.room.find(FIND_STRUCTURES, {
@@ -20,20 +20,11 @@ var roleHarvester = {
         }
 	},
 
-    harvest: function(creep) {
+    harvest: function(creep, sources) {
         if (creep.memory.sourceId == undefined) {
-            var sources = creep.room.find(FIND_SOURCES);
-            for (let source of sources) {
-                if (Memory.sources == undefined || Memory.sources[source.id] == undefined || Memory.sources[source.id] <= 0) {
-                    Memory.sources[source.id] = 1;
-                    creep.memory.sourceId = source.id;
-                    break;
-                } else if (Memory.sources[source.id] < 2) {
-                    Memory.sources[source.id] += 1;
-                    creep.memory.sourceId = source.id;
-                    break;
-                }
-            }
+            var availableSource = sources.getAvailableSource();
+            console.log("role.harvester.harvest() availableSource: " + availableSource.id);
+            creep.memory.sourceId = availableSource.id;
         }
 
         var source = Game.getObjectById(creep.memory.sourceId);
