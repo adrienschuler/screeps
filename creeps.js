@@ -19,10 +19,10 @@ var creeps = {
     },
 
     spawn: function(spawn) {
-        if (creeps.findByRole('harvester').length < 4) {
+        if (creeps.findByRole('harvester').length < 2) {
             return creeps._spawn('harvester', spawn);
         }
-        if (creeps.findByRole('hauler').length < 2) {
+        if (creeps.findByRole('hauler').length < 4) {
             return creeps._spawn('hauler', spawn);
         }
         if (creeps.findByRole('upgrader').length < 2) {

@@ -9,6 +9,7 @@ var roleHauler = {
             container = containersWithEnergy[0].id;
             creep.memory.sourceId = container;
 
+            var container = Game.getObjectById(creep.memory.sourceId);
             if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(container, {visualizePathStyle: {stroke: '#ffaa00'}});
             }
