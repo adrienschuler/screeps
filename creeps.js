@@ -25,7 +25,7 @@ var creeps = {
         if (creeps.findByRole('hauler').length < 4) {
             return creeps._spawn('hauler', spawn);
         }
-        if (creeps.findByRole('upgrader').length < 2) {
+        if (creeps.findByRole('upgrader').length < 4) {
             return creeps._spawn('upgrader', spawn);
         }
         if (creeps.findByRole('builder').length < 8) {
