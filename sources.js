@@ -11,8 +11,7 @@ var sources = {
     getAvailableSource: function() {
         let threshold = 7;
         for (let sourceId in Memory.sources) {
-            console.log(sourceId);
-            if (sourceId != undefined) {
+            if (sourceId !== undefined) {
                 capacity = Memory.sources[sourceId];
                 if (capacity < threshold) {
                     console.log("sources.getAvailableSource: " + sourceId + " = " + capacity);

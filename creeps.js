@@ -39,7 +39,6 @@ var creeps = {
     recycle: function() {
         // BUG: ticksToLive is undefined
         for (let creep in Game.creeps) {
-            console.log(creep.ticksToLive);
             if (creep.ticksToLive < 10) {
                 console.log("Recycling " + creep.name);
                 Memory.sources[creep.memory.sourceId] -= 1;
@@ -52,11 +51,12 @@ var creeps = {
         sources = {};
         for (let name in Game.creeps) {
             creep = Game.creeps[name];
-            if (creep.memory.sourceId != undefined) {
+            if (creep.memory.sourceId !== undefined) {
                 if (sources[creep.memory.sourceId] == undefined) {
                     sources[creep.memory.sourceId] = 0;
                 }
                 sources[creep.memory.sourceId] += 1;
+            }
         }
         return sources;
     },
