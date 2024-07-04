@@ -16,9 +16,12 @@ var roleUpgrader = {
                 creep.moveTo(creep.room.controller, { visualizePathStyle: { stroke: '#ffffff' } });
             }
         } else {
-            var sources = creep.room.find(FIND_SOURCES);
-            if (creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0]);
+            var droppedEnergy = creep.room.find(FIND_DROPPED_RESOURCES, {
+                filter: resource => resource.resourceType == RESOURCE_ENERGY
+            });
+            var closestDroppedEnergy = creep.pos.findClosestByRange(droppedEnergy);
+            if (creep.pickup(closestDroppedEnergy) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(closestDroppedEnergy, { visualizePathStyle: { stroke: '#ffaa00' } });
             }
         }
     },

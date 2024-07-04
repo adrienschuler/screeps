@@ -25,7 +25,7 @@ var hauler = {
         var haulers = _.filter(Game.creeps, (creep) => creep.memory.role == 'hauler' && creep.room.name == room.name);
         Log.debug('haulers: ' + haulers.length, room.name);
 
-        if (haulers.length < 2) {
+        if (haulers.length < 1) {
             return true;
         }
     },
