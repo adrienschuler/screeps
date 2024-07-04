@@ -1,7 +1,7 @@
 module.exports.Utils = {
     clear: (creeps) => {
-        utils.clearMemory();
-        utils.clearSources(creeps);
+        Utils.clearMemory();
+        Utils.clearSources(creeps);
     },
 
     clearMemory: () => {

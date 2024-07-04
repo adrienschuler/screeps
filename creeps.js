@@ -18,16 +18,16 @@ module.exports.Creeps = {
     },
 
     spawn: (spawn) => {
-        if (this.findByRole('harvester').length < 4) {
+        if (Creeps.findByRole('harvester').length < 4) {
             return creeps._spawn('harvester', spawn);
         }
-        // if (creeps.findByRole('hauler').length < 4) {
-        //     return creeps._spawn('hauler', spawn);
+        // if (Creeps.findByRole('hauler').length < 4) {
+        //     return Creeps._spawn('hauler', spawn);
         // }
-        if (this.findByRole('upgrader').length < 4) {
+        if (Creeps.findByRole('upgrader').length < 4) {
             return creeps._spawn('upgrader', spawn);
         }
-        if (this.findByRole('builder').length < 8) {
+        if (Creeps.findByRole('builder').length < 8) {
             return creeps._spawn('builder', spawn);
         }
     },

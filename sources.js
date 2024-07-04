@@ -36,11 +36,11 @@ module.exports.Sources = {
         //     }
 
         // } else if (creep.memory.sourceId == undefined || creep.memory.sourceId == 'undefined' ) {
-        //     creep.memory.sourceId = sources.getAvailableSource();
+        //     creep.memory.sourceId = Sources.getAvailableSource();
         // }
 
         if (creep.memory.sourceId == undefined || creep.memory.sourceId == 'undefined' ) {
-            creep.memory.sourceId = sources.getAvailableSource();
+            creep.memory.sourceId = Sources.getAvailableSource();
         }
 
         var source = Game.getObjectById(creep.memory.sourceId);
