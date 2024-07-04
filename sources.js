@@ -1,14 +1,14 @@
-module.exports.Sources = {
-    init: (room) => {
+module.exports.Sources = class Sources {
+    constructor(room) {
         Memory.sources = Memory.sources || {};
         for (let source of Game.rooms[room].find(FIND_SOURCES)) {
             if (Memory.sources[source.id] == undefined) {
                 Memory.sources[source.id] = 0;
             }
         }
-    },
+    }
 
-    getAvailableSource: () => {
+    getAvailableSource() {
         let threshold = 7;
         for (let sourceId in Memory.sources) {
             if (sourceId !== undefined) {
@@ -20,9 +20,9 @@ module.exports.Sources = {
                 }
             }
         }
-    },
+    }
 
-    harvest: (creep) => {
+    harvest(creep) {
         // if (creep.memory.role == 'builder' || creep.memory.role == 'upgrader') {
         //     const containersWithEnergy = creep.room.find(FIND_STRUCTURES, {
         //         filter: (i) => i.structureType == STRUCTURE_CONTAINER &&
@@ -36,11 +36,11 @@ module.exports.Sources = {
         //     }
 
         // } else if (creep.memory.sourceId == undefined || creep.memory.sourceId == 'undefined' ) {
-        //     creep.memory.sourceId = Sources.getAvailableSource();
+        //     creep.memory.sourceId = this.getAvailableSource();
         // }
 
         if (creep.memory.sourceId == undefined || creep.memory.sourceId == 'undefined' ) {
-            creep.memory.sourceId = Sources.getAvailableSource();
+            creep.memory.sourceId = this.getAvailableSource();
         }
 
         var source = Game.getObjectById(creep.memory.sourceId);
