@@ -1,5 +1,3 @@
-import { debug } from './logging';
-
 const Utils = {
     clear: (creeps) => {
         Utils.clearMemory();
@@ -10,7 +8,7 @@ const Utils = {
         for (let name in Memory.creeps) {
             if (!Game.creeps[name]) {
                 delete Memory.creeps[name];
-                debug('Clearing non-existing creep memory:', name);
+                Log.debug(`Clearing non-existing creep memory: {name}`);
             }
         }
     },

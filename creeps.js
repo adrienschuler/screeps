@@ -1,5 +1,3 @@
-import { debug } from './logging';
-
 const roles = {
     harvester: require('role.harvester'),
     builder: require('role.builder'),
@@ -21,7 +19,7 @@ const Creeps = {
     _spawn: (role, spawn) => {
         var name = role + Game.time;
         if (Game.spawns[spawn].spawnCreep([WORK, CARRY, MOVE], name, {memory: {role: role}}) == 0) {
-            debug('Spawning new ' + role + ': ' + name);
+            Log.debug('Spawning new ' + role + ': ' + name);
         }
     },
 
@@ -51,7 +49,7 @@ const Creeps = {
         // BUG: ticksToLive is undefined
         for (let creep in Game.creeps) {
             if (creep.ticksToLive < 10) {
-                debug(`Recycling {creep.name}`);
+                Log.debug(`Recycling {creep.name}`);
                 Memory.sources[creep.memory.sourceId] -= 1;
                 creep.suicide();
             }

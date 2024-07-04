@@ -1,3 +1,5 @@
+global.Log = require('./log');
+
 var Utils = require('utils');
 var Creeps = require('creeps');
 var Sources = require('sources');
