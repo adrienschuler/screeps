@@ -1,11 +1,11 @@
-var roles = {
+const roles = {
     harvester: require('role.harvester'),
     builder: require('role.builder'),
     upgrader: require('role.upgrader'),
     hauler: require('role.hauler'),
 };
 
-module.exports.creeps = {
+module.exports.Creeps = {
     findByRole: (role) => {
         return _.filter(Game.creeps, (creep) => creep.memory.role == role);
     },

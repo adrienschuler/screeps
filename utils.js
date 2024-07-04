@@ -1,4 +1,4 @@
-module.exports.utils = {
+module.exports.Utils = {
     clear: (creeps) => {
         utils.clearMemory();
         utils.clearSources(creeps);

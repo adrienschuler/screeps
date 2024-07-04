@@ -1,4 +1,4 @@
-module.exports.sources = {
+module.exports.Sources = {
     init: (room) => {
         Memory.sources = Memory.sources || {};
         for (let source of Game.rooms[room].find(FIND_SOURCES)) {

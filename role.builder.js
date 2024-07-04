@@ -1,4 +1,4 @@
-module.exports.roleBuilder = {
+module.exports.RoleBuilder = {
     run: (creep, sources) => {
 
 	    if (creep.memory.building && creep.store[RESOURCE_ENERGY] == 0) {
