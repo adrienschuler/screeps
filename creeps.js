@@ -1,3 +1,5 @@
+require('logging');
+
 const roles = {
     harvester: require('role.harvester'),
     builder: require('role.builder'),

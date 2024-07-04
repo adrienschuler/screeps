@@ -1,3 +1,5 @@
+require('logging');
+
 const Sources = {
     init: (room) => {
         Memory.sources = Memory.sources || {};
