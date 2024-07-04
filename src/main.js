@@ -12,6 +12,8 @@ module.exports.loop = function () {
     // run spwan logic for each room in our empire
     _.forEach(Game.myRooms, r => roomLogic.spawning(r));
 
+    _.forEach(Game.myRooms, r => roomLogic.extensions(r));
+
     // run each creep role
     for (var name in Game.creeps) {
         var creep = Game.creeps[name];
