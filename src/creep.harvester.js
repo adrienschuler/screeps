@@ -7,14 +7,8 @@ var harvester = {
             var allocatedCapacities = _.countBy(harvesters, 'memory.sourceId');
             var sources = creep.room.find(FIND_SOURCES);
 
-            Log.debug(sources);
-            Log.debug(allocatedCapacities);
-
             for (var i = 0; i < sources.length; i++) {
-                if (allocatedCapacities[sources[i].id] == undefined) {
-                    creep.memory.sourceId = sources[i].id;
-                    break;
-                } else if (allocatedCapacities[sources[i].id] < 2) {
+                if (allocatedCapacities[sources[i].id] == undefined || allocatedCapacities[sources[i].id] < 3) {
                     creep.memory.sourceId = sources[i].id;
                     break;
                 }
