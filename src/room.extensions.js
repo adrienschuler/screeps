@@ -7,12 +7,16 @@ function createExtensions(room) {
         filter: { structureType: STRUCTURE_EXTENSION }
     });
 
-    if (extensions.length < 5) {
-        let spawn = room.find(FIND_MY_SPAWNS)[0];
-        let pos = spawn.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
+    Log.debug(extensions);
 
-        if (pos) {
-            room.createConstructionSite(pos, STRUCTURE_EXTENSION);
+    let spawn = room.find(FIND_MY_SPAWNS)[0];
+    let x = spawn.pos.x - 2;
+    let y = spawn.pos.y + 1;
+
+    if (extensions.length < 5) {
+        for (let i = 0; i < 5; i++) {
+            room.createConstructionSite(x, y, STRUCTURE_EXTENSION);
+            x += 1;
         }
     }
 }
