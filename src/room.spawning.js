@@ -13,7 +13,7 @@ function spawnCreeps(room) {
 
     // get the data for spawning a new creep of creepTypeNeeded
     let creepSpawnData = creepLogic[creepTypeNeeded] && creepLogic[creepTypeNeeded].spawnData(room);
-    Log.debug(room, JSON.stringify(creepSpawnData));
+    Log.debug(room, creepSpawnData);
 
     if (creepSpawnData) {
         // find the first or 0th spawn in the room
