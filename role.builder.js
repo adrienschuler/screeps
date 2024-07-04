@@ -1,5 +1,5 @@
 const RoleBuilder = {
-    run: (creep, sources) => {
+    run: (creep) => {
 	    if (creep.memory.building && creep.store[RESOURCE_ENERGY] == 0) {
             creep.memory.building = false;
             creep.say('🔄 harvest');

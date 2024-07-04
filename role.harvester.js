@@ -1,7 +1,7 @@
 const RoleHarvester = {
-    run: (creep, sources) => {
+    run: (creep) => {
 	    if (creep.store.getFreeCapacity() > 0) {
-            sources.harvest(creep);
+            Creeps.harvest(creep);
         }
         else {
             var targets = creep.room.find(FIND_STRUCTURES, {

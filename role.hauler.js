@@ -1,5 +1,5 @@
 const RoleHauler = {
-    run: (creep, sources) => {
+    run: (creep) => {
         if (creep.store.getFreeCapacity() > 0) {
             const containersWithEnergy = creep.room.find(FIND_STRUCTURES, {
                 filter: (i) => i.structureType == STRUCTURE_CONTAINER &&

@@ -1,15 +1,21 @@
 global.Log = require('./log');
+global.SPAWN = 'Spawn1';
 
 var Utils = require('utils');
 var Creeps = require('creeps');
-var Sources = require('sources');
+
 
 module.exports.loop = () => {
-    const ROOM = 'E45S2';
-    const SPAWN = 'Spawn1';
 
-    Sources.init(ROOM);
-    Creeps.init(SPAWN, Sources);
+    var roles = {};
+    for (creep in Game.creeps) {
+        if (roles[creep.memory.role] == undefined) {
+            roles[creep.memory.role] = 0;
+        }
+        roles[creep.memory.role] += 1
+    }
 
-    Utils.clear(Creeps);
+    Log.debug(roles);
+
+    Utils.clearMemory();
 }
