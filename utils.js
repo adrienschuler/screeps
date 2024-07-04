@@ -1,3 +1,5 @@
+import { debug } from './logging';
+
 const Utils = {
     clear: (creeps) => {
         Utils.clearMemory();

@@ -1,4 +1,4 @@
-require('logging');
+import { debug } from './logging';
 
 const roles = {
     harvester: require('role.harvester'),
