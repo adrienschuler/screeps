@@ -6,7 +6,7 @@ var harvester = {
             var sources = creep.room.find(FIND_SOURCES);
             creep.memory.sourceId = sources[0].id;
 
-            var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester' && creep.room.name == room.name);
+            var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
             var counts = _.countBy(harvesters, 'memory.sourceId');
             Log.debug(harvesters);
             Log.debug(counts);
