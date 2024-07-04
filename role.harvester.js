@@ -1,4 +1,4 @@
-module.exports.RoleHarvester = {
+const RoleHarvester = {
     run: (creep, sources) => {
 	    if (creep.store.getFreeCapacity() > 0) {
             sources.harvest(creep);
@@ -18,3 +18,5 @@ module.exports.RoleHarvester = {
         }
 	},
 }
+
+module.exports = RoleHarvester;

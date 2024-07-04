@@ -1,4 +1,4 @@
-module.exports.RoleUpgrader = {
+const RoleUpgrader = {
     run: (creep, sources) => {
         if (creep.memory.upgrading && creep.store[RESOURCE_ENERGY] == 0) {
             creep.memory.upgrading = false;
@@ -19,3 +19,5 @@ module.exports.RoleUpgrader = {
         }
 	}
 }
+
+module.exports = RoleUpgrader;

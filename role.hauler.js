@@ -1,4 +1,4 @@
-module.exports.RoleHauler = {
+const RoleHauler = {
     run: (creep, sources) => {
         if (creep.store.getFreeCapacity() > 0) {
             const containersWithEnergy = creep.room.find(FIND_STRUCTURES, {
@@ -27,3 +27,5 @@ module.exports.RoleHauler = {
         }
     }
 }
+
+module.exports = RoleHauler;

@@ -1,4 +1,4 @@
-module.exports.RoleBuilder = {
+const RoleBuilder = {
     run: (creep, sources) => {
 	    if (creep.memory.building && creep.store[RESOURCE_ENERGY] == 0) {
             creep.memory.building = false;
@@ -22,3 +22,5 @@ module.exports.RoleBuilder = {
         }
 	}
 }
+
+module.exports = RoleBuilder;
