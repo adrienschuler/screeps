@@ -1,6 +1,13 @@
 let creepLogic = require('creep.logic');
 let creepTypes = _.keys(creepLogic);
 
+const queue = [
+    'harvester',
+    'hauler',
+    'upgrader',
+    'builder',
+];
+
 function spawnCreeps(room) {
 
     // lists all the creep types to console

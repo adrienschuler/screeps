@@ -1,6 +1,7 @@
+const TOTAL_BUILDERS = 1;
+
 var builder = {
 
-    /** @param {Creep} creep **/
     run: function(creep) {
         if (creep.memory.building && creep.store[RESOURCE_ENERGY] == 0) {
             creep.memory.building = false;
@@ -45,7 +46,7 @@ var builder = {
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.room.name == room.name);
         // Log.debug(`Builders: ${builders.length} ${room.name}`);
 
-        if (builders.length < 3) {
+        if (builders.length < TOTAL_BUILDERS) {
             return true;
         }
     },

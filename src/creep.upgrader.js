@@ -1,6 +1,7 @@
+const TOTAL_UPGRADERS = 2;
+
 var upgrader = {
 
-    /** @param {Creep} creep **/
     run: function(creep) {
         if (creep.memory.upgrading && creep.store[RESOURCE_ENERGY] == 0) {
             creep.memory.upgrading = false;
@@ -30,7 +31,7 @@ var upgrader = {
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.room.name == room.name);
         // Log.debug(`Upgraders: ${upgraders.length} ${room.name}`);
 
-        if (upgraders.length < 3) {
+        if (upgraders.length < TOTAL_UPGRADERS) {
             return true;
         }
     },

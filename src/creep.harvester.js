@@ -1,6 +1,8 @@
+const TOTAL_HARVESTERS = 2;
+const HARVESTERS_PER_SOURCE = 1;
+
 var harvester = {
 
-    /** @param {Creep} creep **/
     run: function(creep) {
         if (creep.memory.sourceId == null) {
             var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
@@ -8,7 +10,7 @@ var harvester = {
             var sources = creep.room.find(FIND_SOURCES);
 
             for (var i = 0; i < sources.length; i++) {
-                if (allocatedCapacities[sources[i].id] == undefined || allocatedCapacities[sources[i].id] < 3) {
+                if (allocatedCapacities[sources[i].id] == undefined || allocatedCapacities[sources[i].id] < HARVESTERS_PER_SOURCE) {
                     creep.memory.sourceId = sources[i].id;
                     break;
                 }
@@ -25,7 +27,7 @@ var harvester = {
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester' && creep.room.name == room.name);
         // Log.debug('Harvesters: ' + harvesters.length, room.name);
 
-        if (harvesters.length < 6) {
+        if (harvesters.length < TOTAL_HARVESTERS) {
             return true;
         }
     },
