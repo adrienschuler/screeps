@@ -4,7 +4,7 @@ let creepTypes = _.keys(creepLogic);
 function spawnCreeps(room) {
 
     // lists all the creep types to console
-    _.forEach(creepTypes, type => Log.debug(type));
+    // _.forEach(creepTypes, type => Log.debug(type));
 
     // find a creep type that returns true for the .spawn() function
     let creepTypeNeeded = _.find(creepTypes, function(type) {

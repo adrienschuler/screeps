@@ -12,8 +12,8 @@ module.exports.loop = function () {
     // run spwan logic for each room in our empire
     _.forEach(Game.myRooms, r => roomLogic.spawning(r));
 
-    // run each creep role see /creeps/index.js
-    for(var name in Game.creeps) {
+    // run each creep role
+    for (var name in Game.creeps) {
         var creep = Game.creeps[name];
 
         let role = creep.memory.role;
@@ -23,8 +23,8 @@ module.exports.loop = function () {
     }
 
     // free up memory if creep no longer exists
-    for(var name in Memory.creeps) {
-        if(!Game.creeps[name]) {
+    for (var name in Memory.creeps) {
+        if (!Game.creeps[name]) {
             delete Memory.creeps[name];
             Log.debug(`Clearing non-existing creep memory: ${name}`);
         }
