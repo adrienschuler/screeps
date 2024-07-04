@@ -4,17 +4,21 @@ var harvester = {
     run: function(creep) {
         if (creep.memory.sourceId == null) {
             var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
-            var counts = _.countBy(harvesters, 'memory.sourceId');
-            Log.debug(harvesters);
-            Log.debug(counts);
-
+            var allocatedCapacities = _.countBy(harvesters, 'memory.sourceId');
             var sources = creep.room.find(FIND_SOURCES);
-            creep.memory.sourceId = sources[0].id;
 
-            var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
-            var counts = _.countBy(harvesters, 'memory.sourceId');
-            Log.debug(harvesters);
-            Log.debug(counts);
+            Log.debug(sources);
+            Log.debug(allocatedCapacities);
+
+            for (var i = 0; i < sources.length; i++) {
+                if (allocatedCapacities[sources[i].id] == undefined) {
+                    creep.memory.sourceId = sources[i].id;
+                    break;
+                } else if (allocatedCapacities[sources[i].id] < 2) {
+                    creep.memory.sourceId = sources[i].id;
+                    break;
+                }
+            }
         }
 
         var source = Game.getObjectById(creep.memory.sourceId);
