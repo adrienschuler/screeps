@@ -12,7 +12,7 @@ var harvester = {
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester' && creep.room.name == room.name);
         Log.debug('Harvesters: ' + harvesters.length, room.name);
 
-        if (harvesters.length < 2) {
+        if (harvesters.length < 3) {
             return true;
         }
     },

@@ -30,7 +30,7 @@ var upgrader = {
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.room.name == room.name);
         Log.debug(`Upgraders: ${upgraders.length} ${room.name}`);
 
-        if (upgraders.length < 4) {
+        if (upgraders.length < 3) {
             return true;
         }
     },
