@@ -17,6 +17,18 @@ var builder = {
                 if (creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
+            } else {
+                const targets = creep.room.find(FIND_STRUCTURES, {
+                    filter: object => object.hits < object.hitsMax
+                });
+
+                targets.sort((a,b) => a.hits - b.hits);
+
+                if (targets.length > 0) {
+                    if(creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(targets[0]);
+                    }
+                }
             }
         } else {
             var droppedEnergy = creep.room.find(FIND_DROPPED_RESOURCES, {
@@ -33,7 +45,7 @@ var builder = {
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.room.name == room.name);
         Log.debug(`Builders: ${builders.length} ${room.name}`);
 
-        if (builders.length < 3) {
+        if (builders.length < 1) {
             return true;
         }
     },
