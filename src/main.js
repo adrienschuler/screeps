@@ -1,6 +1,8 @@
-let creepLogic = require('./creeps');
-let roomLogic = require('./room');
-let prototypes = require('./prototypes');
+global.Log = require('log');
+
+let creepLogic = require('creep.logic');
+let roomLogic = require('room.logic');
+let prototypes = require('prototypes.creep');
 
 
 module.exports.loop = function () {
@@ -24,7 +26,7 @@ module.exports.loop = function () {
     for(var name in Memory.creeps) {
         if(!Game.creeps[name]) {
             delete Memory.creeps[name];
-            console.log('Clearing non-existing creep memory:', name);
+            Log.debug(`Clearing non-existing creep memory: ${name}`);
         }
     }
 }
