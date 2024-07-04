@@ -1,7 +1,7 @@
 require('logging');
-const {Utils} = require('utils');
-const {Creeps} = require('creeps');
-const {Sources} = require('sources');
+var Utils = require('utils');
+var Creeps = require('creeps');
+var Sources = require('sources');
 
 module.exports.loop = () => {
     const ROOM = 'E45S2';
