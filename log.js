@@ -2,6 +2,6 @@ const stringifyData = (data) => (_.map(data, (item) => JSON.stringify(item))).jo
 
 module.exports = {
     debug: (...data) => {
-        console.debug('[DEBUG]', Game.time, stringifyData(data));
+        console.log('[DEBUG]', Game.time, stringifyData(data));
     }
 }
