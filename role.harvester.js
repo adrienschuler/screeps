@@ -1,6 +1,5 @@
-var roleHarvester = {
-
-    run: function(creep, sources) {
+module.exports.roleHarvester = {
+    run: (creep, sources) => {
 	    if (creep.store.getFreeCapacity() > 0) {
             sources.harvest(creep);
         }
@@ -18,6 +17,4 @@ var roleHarvester = {
             }
         }
 	},
-};
-
-module.exports = roleHarvester;
+}

@@ -1,10 +1,11 @@
+require('logging');
 var utils = require('utils');
 var creeps = require('creeps');
 var sources = require('sources');
 
-module.exports.loop = function() {
-    var ROOM = "E45S2";
-    var SPAWN = "Spawn1";
+module.exports.loop = () => {
+    var ROOM = 'E45S2';
+    var SPAWN = 'Spawn1';
 
     sources.init(ROOM);
 

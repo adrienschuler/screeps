@@ -1,6 +1,5 @@
-var roleHauler = {
-
-    run: function(creep, sources) {
+module.exports.roleHauler = {
+    run: (creep, sources) => {
         if (creep.store.getFreeCapacity() > 0) {
             const containersWithEnergy = creep.room.find(FIND_STRUCTURES, {
                 filter: (i) => i.structureType == STRUCTURE_CONTAINER &&
@@ -28,5 +27,3 @@ var roleHauler = {
         }
     }
 }
-
-module.exports = roleHauler;

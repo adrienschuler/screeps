@@ -1,6 +1,5 @@
-var roleUpgrader = {
-
-    run: function(creep, sources) {
+module.exports.roleUpgrader = {
+    run: (creep, sources) => {
 
         if (creep.memory.upgrading && creep.store[RESOURCE_ENERGY] == 0) {
             creep.memory.upgrading = false;
@@ -20,6 +19,4 @@ var roleUpgrader = {
 			sources.harvest(creep);
         }
 	}
-};
-
-module.exports = roleUpgrader;
+}

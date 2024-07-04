@@ -5,26 +5,25 @@ var roles = {
     hauler: require('role.hauler'),
 };
 
-var creeps = {
-
-    findByRole: function(role) {
+module.exports.creeps = {
+    findByRole: (role) => {
         return _.filter(Game.creeps, (creep) => creep.memory.role == role);
     },
 
-    _spawn: function(role, spawn) {
+    _spawn: (role, spawn) => {
         var name = role + Game.time;
         if (Game.spawns[spawn].spawnCreep([WORK, CARRY, MOVE], name, {memory: {role: role}}) == 0) {
-            console.log('Spawning new ' + role + ': ' + name);
+            debug('Spawning new ' + role + ': ' + name);
         }
     },
 
-    spawn: function(spawn) {
-        if (creeps.findByRole('harvester').length < 2) {
+    spawn: (spawn) => {
+        if (creeps.findByRole('harvester').length < 4) {
             return creeps._spawn('harvester', spawn);
         }
-        if (creeps.findByRole('hauler').length < 4) {
-            return creeps._spawn('hauler', spawn);
-        }
+        // if (creeps.findByRole('hauler').length < 4) {
+        //     return creeps._spawn('hauler', spawn);
+        // }
         if (creeps.findByRole('upgrader').length < 4) {
             return creeps._spawn('upgrader', spawn);
         }
@@ -33,25 +32,25 @@ var creeps = {
         }
     },
 
-    run: function(sources) {
+    run: (sources) => {
         for (let name in Game.creeps) {
             var creep = Game.creeps[name];
             roles[creep.memory.role].run(creep, sources);
         }
     },
 
-    recycle: function() {
+    recycle: () => {
         // BUG: ticksToLive is undefined
         for (let creep in Game.creeps) {
             if (creep.ticksToLive < 10) {
-                console.log("Recycling " + creep.name);
+                debug(`Recycling {creep.name}`);
                 Memory.sources[creep.memory.sourceId] -= 1;
                 creep.suicide();
             }
         }
     },
 
-    getSources: function() {
+    getSources: () => {
         sources = {};
         for (let name in Game.creeps) {
             creep = Game.creeps[name];
@@ -65,5 +64,3 @@ var creeps = {
         return sources;
     },
 }
-
-module.exports = creeps;
