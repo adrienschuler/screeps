@@ -1,4 +1,4 @@
-const TOTAL_HAULERS = 2;
+const TOTAL_HAULERS = 4;
 
 var hauler = {
 
@@ -26,15 +26,23 @@ var hauler = {
 
             var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) &&
-                        structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                    return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0);
                 }
             });
 
-            if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#ffaa00' } });
-            } else {
-                creep.memory.sourceId = null;
+            // targets.sort((a, b) => a.store.getFreeCapacity(RESOURCE_ENERGY) - b.store.getFreeCapacity(RESOURCE_ENERGY));
+
+            let transfer = creep.transfer(targets[0], RESOURCE_ENERGY);
+            switch (transfer) {
+                case 0:
+                    break;
+                case ERR_NOT_IN_RANGE:
+                    creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#ffaa00' } });
+                    break;
+                case ERR_FULL:
+                    creep.drop(RESOURCE_ENERGY);
+                    creep.memory.sourceId = null;
+                    break;
             }
         }
     },

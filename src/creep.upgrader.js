@@ -1,4 +1,4 @@
-const TOTAL_UPGRADERS = 2;
+const TOTAL_UPGRADERS = 4;
 
 var upgrader = {
 

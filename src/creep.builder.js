@@ -1,4 +1,4 @@
-const TOTAL_BUILDERS = 2;
+const TOTAL_BUILDERS = 4;
 
 var builder = {
 

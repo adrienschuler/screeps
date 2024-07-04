@@ -10,13 +10,13 @@ function createExtensions(room) {
     Log.debug(extensions);
 
     let spawn = room.find(FIND_MY_SPAWNS)[0];
-    let x = spawn.pos.x - 2;
-    let y = spawn.pos.y + 1;
+    let x = spawn.pos.x - 1;
+    let y = spawn.pos.y - 2;
 
     if (extensions.length < 5) {
         for (let i = 0; i < 5; i++) {
             room.createConstructionSite(x, y, STRUCTURE_EXTENSION);
-            x += 1;
+            y += 1;
         }
     }
 }
