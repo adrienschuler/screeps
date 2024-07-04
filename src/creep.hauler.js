@@ -30,7 +30,7 @@ var hauler = {
     // checks if the room needs to spawn a creep
     spawn: function(room) {
         var haulers = _.filter(Game.creeps, (creep) => creep.memory.role == 'hauler' && creep.room.name == room.name);
-        Log.debug('haulers: ' + haulers.length, room.name);
+        // Log.debug('haulers: ' + haulers.length, room.name);
 
         if (haulers.length < 3) {
             return true;

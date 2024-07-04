@@ -28,7 +28,7 @@ var upgrader = {
     // checks if the room needs to spawn a creep
     spawn: function(room) {
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.room.name == room.name);
-        Log.debug(`Upgraders: ${upgraders.length} ${room.name}`);
+        // Log.debug(`Upgraders: ${upgraders.length} ${room.name}`);
 
         if (upgraders.length < 3) {
             return true;

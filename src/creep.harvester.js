@@ -20,7 +20,7 @@ var harvester = {
     // checks if the room needs to spawn a creep
     spawn: function(room) {
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester' && creep.room.name == room.name);
-        Log.debug('Harvesters: ' + harvesters.length, room.name);
+        // Log.debug('Harvesters: ' + harvesters.length, room.name);
 
         if (harvesters.length < 3) {
             return true;

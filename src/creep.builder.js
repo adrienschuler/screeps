@@ -43,7 +43,7 @@ var builder = {
     // checks if the room needs to spawn a creep
     spawn: function(room) {
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.room.name == room.name);
-        Log.debug(`Builders: ${builders.length} ${room.name}`);
+        // Log.debug(`Builders: ${builders.length} ${room.name}`);
 
         if (builders.length < 3) {
             return true;
