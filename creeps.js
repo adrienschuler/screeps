@@ -5,47 +5,47 @@ const roles = {
     hauler: require('role.hauler'),
 };
 
-module.exports.Creeps = class Creeps {
-    constructor(spawn, Sources) {
-        this.spawn(spawn);
-        this.run(Sources);
-        this.recycle();
-    }
+const Creeps = {
+    init: (spawn, Sources) => {
+        Creeps.spawn(spawn);
+        Creeps.run(Sources);
+        Creeps.recycle();
+    },
 
-    findByRole(role) {
+    findByRole: (role) => {
         return _.filter(Game.creeps, (creep) => creep.memory.role == role);
-    }
+    },
 
-    _spawn(role, spawn) {
+    _spawn: (role, spawn) => {
         var name = role + Game.time;
         if (Game.spawns[spawn].spawnCreep([WORK, CARRY, MOVE], name, {memory: {role: role}}) == 0) {
             debug('Spawning new ' + role + ': ' + name);
         }
-    }
+    },
 
-    spawn(spawn) {
-        if (this.findByRole('harvester').length < 4) {
-            return this._spawn('harvester', spawn);
+    spawn: (spawn) => {
+        if (Creeps.findByRole('harvester').length < 4) {
+            return Creeps._spawn('harvester', spawn);
         }
-        // if (this.findByRole('hauler').length < 4) {
-        //     return this._spawn('hauler', spawn);
+        // if (Creeps.findByRole('hauler').length < 4) {
+        //     return Creeps._spawn('hauler', spawn);
         // }
-        if (this.findByRole('upgrader').length < 4) {
-            return this._spawn('upgrader', spawn);
+        if (Creeps.findByRole('upgrader').length < 4) {
+            return Creeps._spawn('upgrader', spawn);
         }
-        if (this.findByRole('builder').length < 8) {
-            return this._spawn('builder', spawn);
+        if (Creeps.findByRole('builder').length < 8) {
+            return Creeps._spawn('builder', spawn);
         }
-    }
+    },
 
-    run(sources) {
+    run: (sources) => {
         for (let name in Game.creeps) {
             var creep = Game.creeps[name];
             roles[creep.memory.role].run(creep, sources);
         }
-    }
+    },
 
-    recycle() {
+    recycle: () => {
         // BUG: ticksToLive is undefined
         for (let creep in Game.creeps) {
             if (creep.ticksToLive < 10) {
@@ -54,9 +54,9 @@ module.exports.Creeps = class Creeps {
                 creep.suicide();
             }
         }
-    }
+    },
 
-    getSources() {
+    getSources: () => {
         sources = {};
         for (let name in Game.creeps) {
             creep = Game.creeps[name];
@@ -70,3 +70,5 @@ module.exports.Creeps = class Creeps {
         return sources;
     }
 }
+
+module.exports = Creeps;

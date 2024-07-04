@@ -1,14 +1,14 @@
 require('logging');
-var {Utils} = require('utils');
-var {Creeps} = require('creeps');
-var {Sources} = require('sources');
+const {Utils} = require('utils');
+const {Creeps} = require('creeps');
+const {Sources} = require('sources');
 
 module.exports.loop = () => {
-    var ROOM = 'E45S2';
-    var SPAWN = 'Spawn1';
+    const ROOM = 'E45S2';
+    const SPAWN = 'Spawn1';
 
-    Sources = new Sources(ROOM);
-    Creeps = new Creeps(SPAWN, Sources);
+    Sources.init(ROOM);
+    Creeps.init(SPAWN, Sources);
 
     Utils.clear(Creeps);
 }

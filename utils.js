@@ -1,4 +1,4 @@
-module.exports.Utils = {
+const Utils = {
     clear: (creeps) => {
         Utils.clearMemory();
         Utils.clearSources(creeps);
@@ -24,3 +24,5 @@ module.exports.Utils = {
         }
     }
 }
+
+module.exports = Utils;
