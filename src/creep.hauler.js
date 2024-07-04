@@ -23,7 +23,7 @@ var hauler = {
             });
 
             if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(closestSpawn, { visualizePathStyle: { stroke: '#ffaa00' } });
+                creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#ffaa00' } });
             }
         }
     },
