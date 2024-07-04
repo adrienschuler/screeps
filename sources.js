@@ -14,7 +14,7 @@ const Sources = {
             if (sourceId !== undefined) {
                 capacity = Memory.sources[sourceId];
                 if (capacity < threshold) {
-                    Log.debug(`sources.getAvailableSource: {sourceId} = {capacity}`);
+                    Log.debug(`sources.getAvailableSource: ${sourceId} = ${capacity}`);
                     Memory.sources[sourceId] += 1;
                     return sourceId;
                 }
