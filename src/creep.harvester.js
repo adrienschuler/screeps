@@ -19,7 +19,7 @@ const harvester = {
 
         let source = Game.getObjectById(creep.memory.sourceId);
         if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-            creep.moveTo(source);
+            creep.moveTo(source, { visualizePathStyle: { stroke: '#ffffff' } });
         }
     },
     // checks if the room needs to spawn a creep

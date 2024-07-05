@@ -3,6 +3,7 @@ const TOTAL_HAULERS = 5;
 const hauler = {
 
     run: function(creep) {
+        // idling, let's find the biggest dropped energy to haul from
         if (creep.memory.sourceId == null) {
             let droppedEnergy = creep.room.find(FIND_DROPPED_RESOURCES, {
                 filter: resource => resource.resourceType == RESOURCE_ENERGY
@@ -13,36 +14,45 @@ const hauler = {
             creep.memory.sourceId = droppedEnergy[0].id;
         }
 
+        // haul energy from the source until full
         if (creep.store.getFreeCapacity() > 0) {
             let source = Game.getObjectById(creep.memory.sourceId);
 
             if (creep.pickup(source) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(source, { visualizePathStyle: { stroke: '#ffaa00' } });
+                creep.moveTo(source, { visualizePathStyle: { stroke: '#ffffff' } });
             }
         }
         else {
-            // const spawns = creep.room.find(FIND_MY_SPAWNS);
-            // const closestSpawn = creep.pos.findClosestByRange(spawns);
-
-            let targets = creep.room.find(FIND_STRUCTURES, {
+            // full, let's transfer energy to the closest spawn or extension
+            let target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN);
+                    return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) && (structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0);
                 }
             });
 
-            // targets.sort((a, b) => a.store.getFreeCapacity(RESOURCE_ENERGY) - b.store.getFreeCapacity(RESOURCE_ENERGY));
-
-            let transfer = creep.transfer(targets[0], RESOURCE_ENERGY);
-            switch (transfer) {
-                case 0:
-                    break;
-                case ERR_NOT_IN_RANGE:
-                    creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#ffaa00' } });
-                    break;
-                case ERR_FULL:
+            if (target) {
+                // transfer energy to the target
+                let transfer = creep.transfer(target, RESOURCE_ENERGY);
+                switch (transfer) {
+                    case 0:
+                        break;
+                    case ERR_NOT_IN_RANGE:
+                        creep.moveTo(target, { visualizePathStyle: { stroke: '#ffaa00' } });
+                        break;
+                    case ERR_FULL:
+                        creep.drop(RESOURCE_ENERGY);
+                        creep.memory.sourceId = null;
+                        break;
+                }
+            } else {
+                // all targets are full, let's drop the energy to the closest spawn
+                const spawn = creep.pos.findClosestByRange(FIND_MY_SPAWNS);
+                if (creep.transfer(spawn, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(spawn, { visualizePathStyle: { stroke: '#ffaa00' } });
+                } else {
                     creep.drop(RESOURCE_ENERGY);
                     creep.memory.sourceId = null;
-                    break;
+                }
             }
         }
     },
