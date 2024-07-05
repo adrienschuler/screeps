@@ -1,5 +1,5 @@
-const TOTAL_HARVESTERS = 4;
-const HARVESTERS_PER_SOURCE = 2;
+const TOTAL_HARVESTERS = 6;
+const HARVESTERS_PER_SOURCE = 3;
 
 const harvester = {
 
