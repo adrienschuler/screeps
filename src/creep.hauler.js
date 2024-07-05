@@ -1,4 +1,4 @@
-const TOTAL_HAULERS = 6;
+const TOTAL_HAULERS = 8;
 
 const hauler = {
 
