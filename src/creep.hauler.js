@@ -1,4 +1,4 @@
-const TOTAL_HAULERS = 4;
+const TOTAL_HAULERS = 5;
 
 const hauler = {
 
@@ -59,7 +59,10 @@ const hauler = {
     spawnData: function(room) {
         let name = 'Hauler' + Game.time;
         let body = [CARRY, MOVE, CARRY, MOVE];
-        let memory = {role: 'hauler', sourceId: null};
+        let memory = {
+            role: 'hauler',
+            sourceId: null
+        };
 
         return {name, body, memory};
     }
