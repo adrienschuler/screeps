@@ -5,7 +5,7 @@ const harvester = {
     MAX: 6,
     MAX_PER_SOURCE: 3,
 
-    getName: () => { return `${this.ROLE}-${Game.time}` },
+    getName: function() { return `${this.ROLE}-${Game.time}` },
 
     run: (creep) => {
         if (creep.memory.sourceId == null) {
