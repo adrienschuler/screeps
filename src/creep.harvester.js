@@ -1,15 +1,15 @@
 const TOTAL_HARVESTERS = 4;
 const HARVESTERS_PER_SOURCE = 2;
 
-var harvester = {
+const harvester = {
 
     run: function(creep) {
         if (creep.memory.sourceId == null) {
-            var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
-            var allocatedCapacities = _.countBy(harvesters, 'memory.sourceId');
-            var sources = creep.room.find(FIND_SOURCES);
+            let harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
+            let allocatedCapacities = _.countBy(harvesters, 'memory.sourceId');
+            let sources = creep.room.find(FIND_SOURCES);
 
-            for (var i = 0; i < sources.length; i++) {
+            for (let i = 0; i < sources.length; i++) {
                 if (allocatedCapacities[sources[i].id] == undefined || allocatedCapacities[sources[i].id] < HARVESTERS_PER_SOURCE) {
                     creep.memory.sourceId = sources[i].id;
                     break;
@@ -17,14 +17,14 @@ var harvester = {
             }
         }
 
-        var source = Game.getObjectById(creep.memory.sourceId);
+        let source = Game.getObjectById(creep.memory.sourceId);
         if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
             creep.moveTo(source);
         }
     },
     // checks if the room needs to spawn a creep
     spawn: function(room) {
-        var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester' && creep.room.name == room.name);
+        let harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester' && creep.room.name == room.name);
         // Log.debug('Harvesters: ' + harvesters.length, room.name);
 
         if (harvesters.length < TOTAL_HARVESTERS) {

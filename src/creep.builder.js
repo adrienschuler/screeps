@@ -1,6 +1,6 @@
 const TOTAL_BUILDERS = 4;
 
-var builder = {
+const builder = {
 
     run: function(creep) {
         if (creep.memory.building && creep.store[RESOURCE_ENERGY] == 0) {
@@ -13,37 +13,34 @@ var builder = {
         }
 
         if (creep.memory.building) {
-            var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
+            let targets = creep.room.find(FIND_CONSTRUCTION_SITES);
             if (targets.length) {
                 if (creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             } else {
-                const targets = creep.room.find(FIND_STRUCTURES, {
+                let target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: object => object.hits < object.hitsMax
                 });
 
-                targets.sort((a,b) => a.hits - b.hits);
-
-                if (targets.length > 0) {
-                    if(creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(targets[0]);
+                if (target) {
+                    if (creep.repair(target) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                     }
                 }
             }
         } else {
-            var droppedEnergy = creep.room.find(FIND_DROPPED_RESOURCES, {
+            let droppedEnergy = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES, {
                 filter: resource => resource.resourceType == RESOURCE_ENERGY
             });
-            var closestDroppedEnergy = creep.pos.findClosestByRange(droppedEnergy);
-            if (creep.pickup(closestDroppedEnergy) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(closestDroppedEnergy, { visualizePathStyle: { stroke: '#ffaa00' } });
+            if (creep.pickup(droppedEnergy) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(droppedEnergy, { visualizePathStyle: { stroke: '#ffaa00' } });
             }
         }
     },
     // checks if the room needs to spawn a creep
     spawn: function(room) {
-        var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.room.name == room.name);
+        let builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.room.name == room.name);
         // Log.debug(`Builders: ${builders.length} ${room.name}`);
 
         if (builders.length < TOTAL_BUILDERS) {
@@ -54,7 +51,10 @@ var builder = {
     spawnData: function(room) {
         let name = 'Builder' + Game.time;
         let body = [WORK, CARRY, MOVE];
-        let memory = {role: 'builder'};
+        let memory = {
+            role: 'builder',
+            building: false
+        };
 
         return {name, body, memory};
     }

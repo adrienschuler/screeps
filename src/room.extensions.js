@@ -7,8 +7,6 @@ function createExtensions(room) {
         filter: { structureType: STRUCTURE_EXTENSION }
     });
 
-    Log.debug(extensions);
-
     let spawn = room.find(FIND_MY_SPAWNS)[0];
     let x = spawn.pos.x - 1;
     let y = spawn.pos.y - 2;

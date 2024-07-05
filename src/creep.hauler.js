@@ -1,20 +1,20 @@
 const TOTAL_HAULERS = 4;
 
-var hauler = {
+const hauler = {
 
     run: function(creep) {
         if (creep.memory.sourceId == null) {
-            var droppedEnergy = creep.room.find(FIND_DROPPED_RESOURCES, {
+            let droppedEnergy = creep.room.find(FIND_DROPPED_RESOURCES, {
                 filter: resource => resource.resourceType == RESOURCE_ENERGY
             });
             droppedEnergy.sort((a, b) => b.amount - a.amount);
 
-            // var closestDroppedEnergy = creep.pos.findClosestByRange(droppedEnergy);
+            // let closestDroppedEnergy = creep.pos.findClosestByRange(droppedEnergy);
             creep.memory.sourceId = droppedEnergy[0].id;
         }
 
         if (creep.store.getFreeCapacity() > 0) {
-            var source = Game.getObjectById(creep.memory.sourceId);
+            let source = Game.getObjectById(creep.memory.sourceId);
 
             if (creep.pickup(source) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(source, { visualizePathStyle: { stroke: '#ffaa00' } });
@@ -24,7 +24,7 @@ var hauler = {
             // const spawns = creep.room.find(FIND_MY_SPAWNS);
             // const closestSpawn = creep.pos.findClosestByRange(spawns);
 
-            var targets = creep.room.find(FIND_STRUCTURES, {
+            let targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN);
                 }
@@ -48,7 +48,7 @@ var hauler = {
     },
     // checks if the room needs to spawn a creep
     spawn: function(room) {
-        var haulers = _.filter(Game.creeps, (creep) => creep.memory.role == 'hauler' && creep.room.name == room.name);
+        let haulers = _.filter(Game.creeps, (creep) => creep.memory.role == 'hauler' && creep.room.name == room.name);
         // Log.debug('haulers: ' + haulers.length, room.name);
 
         if (haulers.length < TOTAL_HAULERS) {

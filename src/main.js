@@ -15,8 +15,8 @@ module.exports.loop = function () {
     _.forEach(Game.myRooms, r => roomLogic.extensions(r));
 
     // run each creep role
-    for (var name in Game.creeps) {
-        var creep = Game.creeps[name];
+    for (let name in Game.creeps) {
+        let creep = Game.creeps[name];
 
         let role = creep.memory.role;
         if (creepLogic[role]) {
@@ -25,7 +25,7 @@ module.exports.loop = function () {
     }
 
     // free up memory if creep no longer exists
-    for (var name in Memory.creeps) {
+    for (let name in Memory.creeps) {
         if (!Game.creeps[name]) {
             delete Memory.creeps[name];
             Log.debug(`Clearing non-existing creep memory: ${name}`);

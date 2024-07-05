@@ -1,6 +1,6 @@
 const TOTAL_UPGRADERS = 4;
 
-var upgrader = {
+const upgrader = {
 
     run: function(creep) {
         if (creep.memory.upgrading && creep.store[RESOURCE_ENERGY] == 0) {
@@ -17,18 +17,17 @@ var upgrader = {
                 creep.moveTo(creep.room.controller, { visualizePathStyle: { stroke: '#ffffff' } });
             }
         } else {
-            var droppedEnergy = creep.room.find(FIND_DROPPED_RESOURCES, {
+            let droppedEnergy = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES, {
                 filter: resource => resource.resourceType == RESOURCE_ENERGY
             });
-            var closestDroppedEnergy = creep.pos.findClosestByRange(droppedEnergy);
-            if (creep.pickup(closestDroppedEnergy) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(closestDroppedEnergy, { visualizePathStyle: { stroke: '#ffaa00' } });
+            if (creep.pickup(droppedEnergy) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(droppedEnergy, { visualizePathStyle: { stroke: '#ffaa00' } });
             }
         }
     },
     // checks if the room needs to spawn a creep
     spawn: function(room) {
-        var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.room.name == room.name);
+        let upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.room.name == room.name);
         // Log.debug(`Upgraders: ${upgraders.length} ${room.name}`);
 
         if (upgraders.length < TOTAL_UPGRADERS) {
