@@ -4,7 +4,7 @@ const hauler = {
     MIN: 2,
     MAX: 8,
 
-    getName: () => `${this.ROLE}-${Game.time}`,
+    getName: () => { return `${this.ROLE}-${Game.time}` },
 
     run: (creep) => {
         // idling, let's find the biggest dropped energy to haul from

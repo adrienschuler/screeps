@@ -24,7 +24,7 @@ function spawnCreeps(room) {
         }
     }
 
-    if (creepTypeNeeded) {
+    if (creepTypeNeeded !== null) {
         // get the data for spawning a new creep of creepTypeNeeded
         let creepToSpawn = creepLogic[creepTypeNeeded];
 

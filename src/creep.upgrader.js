@@ -4,7 +4,7 @@ const upgrader = {
     MIN: 2,
     MAX: 8,
 
-    getName: () => `${this.ROLE}-${Game.time}`,
+    getName: () => { return `${this.ROLE}-${Game.time}` },
 
     run: (creep) => {
         if (creep.memory.upgrading && creep.store[RESOURCE_ENERGY] == 0) {

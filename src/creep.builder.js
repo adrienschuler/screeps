@@ -4,7 +4,7 @@ const builder = {
     MIN: 2,
     MAX: 6,
 
-    getName: () => `${this.ROLE}-${Game.time}`,
+    getName: () => { return `${this.ROLE}-${Game.time}` },
 
     run: (creep) => {
         if (creep.memory.building && creep.store[RESOURCE_ENERGY] == 0) {
