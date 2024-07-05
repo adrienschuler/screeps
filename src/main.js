@@ -5,7 +5,7 @@ let roomLogic = require('room.logic');
 let prototypes = require('prototypes.creep');
 
 
-module.exports.loop = function () {
+module.exports.loop = () => {
     // make a list of all of our rooms
     Game.myRooms = _.filter(Game.rooms, r => r.controller && r.controller.level > 0 && r.controller.my);
 

@@ -1,20 +1,13 @@
 const harvester = {
     ROLE: 'harvester',
-    getName: function() { return `${this.ROLE}-${Game.time}` },
     BODY: [WORK, WORK, MOVE],
     MIN: 1,
     MAX: 6,
     MAX_PER_SOURCE: 3,
 
-    // spawnData: function(room) {
-    //     let name = 'Harvester' + Game.time;
-    //     let body = [WORK, WORK, MOVE];
-    //     let memory = {role: 'harvester', sourceId: null};
+    getName: () => `${this.ROLE}-${Game.time}`,
 
-    //     return {name, body, memory};
-    // },
-
-    run: function(creep) {
+    run: (creep) => {
         if (creep.memory.sourceId == null) {
             let harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
             let allocatedCapacities = _.countBy(harvesters, 'memory.sourceId');

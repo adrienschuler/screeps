@@ -1,11 +1,12 @@
 const hauler = {
     ROLE: 'hauler',
-    getName: function() { return `${this.ROLE}-${Game.time}` },
     BODY: [CARRY, MOVE, CARRY, MOVE],
     MIN: 2,
     MAX: 8,
 
-    run: function(creep) {
+    getName: () => `${this.ROLE}-${Game.time}`,
+
+    run: (creep) => {
         // idling, let's find the biggest dropped energy to haul from
         if (creep.memory.sourceId == null) {
             let droppedEnergy = creep.room.find(FIND_DROPPED_RESOURCES, {

@@ -1,11 +1,12 @@
 const builder = {
     ROLE: 'builder',
-    getName: function() { return `${this.ROLE}-${Game.time}` },
     BODY: [WORK, CARRY, MOVE],
     MIN: 2,
     MAX: 6,
 
-    run: function(creep) {
+    getName: () => `${this.ROLE}-${Game.time}`,
+
+    run: (creep) => {
         if (creep.memory.building && creep.store[RESOURCE_ENERGY] == 0) {
             creep.memory.building = false;
             creep.say('🔄 harvest');
