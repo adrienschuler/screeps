@@ -18,8 +18,13 @@ const hauler = {
         if (creep.store.getFreeCapacity() > 0) {
             let source = Game.getObjectById(creep.memory.sourceId);
 
-            if (creep.pickup(source) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(source, { visualizePathStyle: { stroke: '#ffffff' } });
+            if (source) {
+                if (creep.pickup(source) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(source, { visualizePathStyle: { stroke: '#ffffff' } });
+                }
+            } else {
+                // no more energy to haul
+                creep.memory.sourceId = null;
             }
         }
         else {
