@@ -1,6 +1,9 @@
-const TOTAL_UPGRADERS = 8;
-
 const upgrader = {
+    ROLE: 'upgrader',
+    getName: function() { return `${this.ROLE}-${Game.time}` },
+    BODY: [WORK, CARRY, MOVE],
+    MIN: 2,
+    MAX: 8,
 
     run: function(creep) {
         if (creep.memory.upgrading && creep.store[RESOURCE_ENERGY] == 0) {
@@ -25,23 +28,6 @@ const upgrader = {
             }
         }
     },
-    // checks if the room needs to spawn a creep
-    spawn: function(room) {
-        let upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.room.name == room.name);
-        // Log.debug(`Upgraders: ${upgraders.length} ${room.name}`);
-
-        if (upgraders.length < TOTAL_UPGRADERS) {
-            return true;
-        }
-    },
-    // returns an object with the data to spawn a new creep
-    spawnData: function(room) {
-        let name = 'Upgrader' + Game.time;
-        let body = [WORK, CARRY, MOVE];
-        let memory = {role: 'upgrader'};
-
-        return {name, body, memory};
-    }
 };
 
 module.exports = upgrader;

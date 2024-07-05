@@ -1,34 +1,46 @@
 let creepLogic = require('creep.logic');
 let creepTypes = _.keys(creepLogic);
 
-const queue = [
-    'harvester',
-    'hauler',
-    'upgrader',
-    'builder',
-];
 
 function spawnCreeps(room) {
+    var creepTypeNeeded = null;
+    let currentRoles = _.countBy(Game.creeps, 'memory.role');
 
-    // lists all the creep types to console
-    // _.forEach(creepTypes, type => Log.debug(type));
-
-    // find a creep type that returns true for the .spawn() function
-    let creepTypeNeeded = _.find(creepTypes, function(type) {
-        return creepLogic[type].spawn(room);
-    });
-
-    // get the data for spawning a new creep of creepTypeNeeded
-    let creepSpawnData = creepLogic[creepTypeNeeded] && creepLogic[creepTypeNeeded].spawnData(room);
-    // Log.debug(room, creepSpawnData);
-
-    if (creepSpawnData) {
-        // find the first or 0th spawn in the room
-        let spawn = room.find(FIND_MY_SPAWNS)[0];
-        let result = spawn.spawnCreep(creepSpawnData.body, creepSpawnData.name, {memory: creepSpawnData.memory});
-
-        // Log.debug(`Tried to Spawn: ${creepTypeNeeded} ${result}`);
+    // first spawn the minimum number of creeps for each role
+    for (let type of creepTypes) {
+        if (currentRoles[type] == undefined || currentRoles[type] < creepLogic[type].MIN) {
+            creepTypeNeeded = type;
+            break;
+        }
     }
+
+    if (!creepTypeNeeded) {
+        // then flood creeps until we reach the max number for each role
+        for (let type of creepTypes) {
+            if (currentRoles[type] == undefined || currentRoles[type] < creepLogic[type].MAX) {
+                creepTypeNeeded = type;
+                break;
+            }
+        }
+    }
+
+    if (creepTypeNeeded) {
+        // get the data for spawning a new creep of creepTypeNeeded
+        let creepToSpawn = creepLogic[creepTypeNeeded];
+
+        if (creepToSpawn) {
+            // find the first or 0th spawn in the room
+            let spawn = room.find(FIND_MY_SPAWNS)[0];
+            let result = spawn.spawnCreep(
+                creepToSpawn.BODY,
+                creepToSpawn.getName(),
+                {memory: {'role': creepToSpawn.ROLE}}
+            );
+
+            // Log.debug(`Tried to Spawn: ${creepTypeNeeded} ${result}`);
+        }
+    }
+
 }
 
 module.exports = spawnCreeps;

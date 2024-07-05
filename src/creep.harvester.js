@@ -1,7 +1,18 @@
-const TOTAL_HARVESTERS = 6;
-const HARVESTERS_PER_SOURCE = 3;
-
 const harvester = {
+    ROLE: 'harvester',
+    getName: function() { return `${this.ROLE}-${Game.time}` },
+    BODY: [WORK, WORK, MOVE],
+    MIN: 1,
+    MAX: 6,
+    MAX_PER_SOURCE: 3,
+
+    // spawnData: function(room) {
+    //     let name = 'Harvester' + Game.time;
+    //     let body = [WORK, WORK, MOVE];
+    //     let memory = {role: 'harvester', sourceId: null};
+
+    //     return {name, body, memory};
+    // },
 
     run: function(creep) {
         if (creep.memory.sourceId == null) {
@@ -10,7 +21,7 @@ const harvester = {
             let sources = creep.room.find(FIND_SOURCES);
 
             for (let i = 0; i < sources.length; i++) {
-                if (allocatedCapacities[sources[i].id] == undefined || allocatedCapacities[sources[i].id] < HARVESTERS_PER_SOURCE) {
+                if (allocatedCapacities[sources[i].id] == undefined || allocatedCapacities[sources[i].id] < this.MAX_PER_SOURCE) {
                     creep.memory.sourceId = sources[i].id;
                     break;
                 }
@@ -22,23 +33,6 @@ const harvester = {
             creep.moveTo(source, { visualizePathStyle: { stroke: '#ffffff' } });
         }
     },
-    // checks if the room needs to spawn a creep
-    spawn: function(room) {
-        let harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester' && creep.room.name == room.name);
-        // Log.debug('Harvesters: ' + harvesters.length, room.name);
-
-        if (harvesters.length < TOTAL_HARVESTERS) {
-            return true;
-        }
-    },
-    // returns an object with the data to spawn a new creep
-    spawnData: function(room) {
-        let name = 'Harvester' + Game.time;
-        let body = [WORK, WORK, MOVE];
-        let memory = {role: 'harvester', sourceId: null};
-
-        return {name, body, memory};
-    }
 };
 
 module.exports = harvester;

@@ -1,6 +1,9 @@
-const TOTAL_HAULERS = 8;
-
 const hauler = {
+    ROLE: 'hauler',
+    getName: function() { return `${this.ROLE}-${Game.time}` },
+    BODY: [CARRY, MOVE, CARRY, MOVE],
+    MIN: 2,
+    MAX: 8,
 
     run: function(creep) {
         // idling, let's find the biggest dropped energy to haul from
@@ -61,26 +64,6 @@ const hauler = {
             }
         }
     },
-    // checks if the room needs to spawn a creep
-    spawn: function(room) {
-        let haulers = _.filter(Game.creeps, (creep) => creep.memory.role == 'hauler' && creep.room.name == room.name);
-        // Log.debug('haulers: ' + haulers.length, room.name);
-
-        if (haulers.length < TOTAL_HAULERS) {
-            return true;
-        }
-    },
-    // returns an object with the data to spawn a new creep
-    spawnData: function(room) {
-        let name = 'Hauler' + Game.time;
-        let body = [CARRY, MOVE, CARRY, MOVE];
-        let memory = {
-            role: 'hauler',
-            sourceId: null
-        };
-
-        return {name, body, memory};
-    }
 };
 
 module.exports = hauler;

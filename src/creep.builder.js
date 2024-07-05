@@ -1,6 +1,9 @@
-const TOTAL_BUILDERS = 5;
-
 const builder = {
+    ROLE: 'builder',
+    getName: function() { return `${this.ROLE}-${Game.time}` },
+    BODY: [WORK, CARRY, MOVE],
+    MIN: 2,
+    MAX: 6,
 
     run: function(creep) {
         if (creep.memory.building && creep.store[RESOURCE_ENERGY] == 0) {
@@ -38,26 +41,6 @@ const builder = {
             }
         }
     },
-    // checks if the room needs to spawn a creep
-    spawn: function(room) {
-        let builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.room.name == room.name);
-        // Log.debug(`Builders: ${builders.length} ${room.name}`);
-
-        if (builders.length < TOTAL_BUILDERS) {
-            return true;
-        }
-    },
-    // returns an object with the data to spawn a new creep
-    spawnData: function(room) {
-        let name = 'Builder' + Game.time;
-        let body = [WORK, CARRY, MOVE];
-        let memory = {
-            role: 'builder',
-            building: false
-        };
-
-        return {name, body, memory};
-    }
 };
 
 module.exports = builder;
